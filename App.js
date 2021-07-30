@@ -40,7 +40,6 @@ const styles = StyleSheet.create({
     fontSize: 40,
     fontWeight: '900',
     lineHeight: 200,
-    textDecorationLine: 'underline',
     fontFamily: 'Peralta-Regular'
   },
   text: {
