@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
     fontWeight: '900',
     lineHeight: 200,
     textDecorationLine: 'underline',
+    fontFamily: 'Peralta-Regular'
   },
   text: {
     color: `${cornSilk}`,
