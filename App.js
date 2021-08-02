@@ -1,22 +1,21 @@
-import 'react-native-gesture-handler';
+import * as React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AppLoading from 'expo-app-loading';
 import { useFonts } from 'expo-font';
-import { assets } from './react-native.config';
-import { NavigationContainer } from '@react-navigation/native';
+import Landing from './Landing';
 
-export default function App() {
-  let [fontsLoaded] = useFonts({
-    "Peralta": require("./assets/fonts/Peralta-Regular.ttf")
-  })
-  if(!fontsLoaded){
-    return <AppLoading/>
-  } else {
-    return (
-      <NavigationContainer>
-        <View style={styles.container}>
+function HomeScreen({navigation}) {
+    let [fontsLoaded] = useFonts({
+      "Peralta": require("./assets/fonts/Peralta-Regular.ttf")
+    })
+    if(!fontsLoaded){
+      return <AppLoading/>
+    } else {
+      return (
+        <View style={styles.container} >
           <Text
             style={styles.title}
             >
@@ -24,6 +23,7 @@ export default function App() {
             </Text>
             <View>
               <Text
+                onPress={() => navigation.push("Landing")}
                 style={styles.text}
               >
                 Swipe Up For A List of Venues
@@ -31,14 +31,21 @@ export default function App() {
             </View>
           <StatusBar style="auto" />
         </View>
-      </NavigationContainer>
-    );
+      );
   }
-  
-  
 }
+const Stack = createNativeStackNavigator();
 
-
+function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} style={styles.homeScreen} />
+        <Stack.Screen name="Landing" component={Landing} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
 
 const darkOlive = "#606c38ff"
 const kombuGreen = "#283618ff"
@@ -48,12 +55,10 @@ const liverDogs = "#bc6c25ff"
 
 const styles = StyleSheet.create({
   container: {
-    flex: 4,
-    flexDirection: 'column',
-    backgroundColor: '#283618ff',
+    flex: 1,
+    backgroundColor: `${kombuGreen}`,
     alignItems: 'center',
     justifyContent: 'center',
-    height: 150,
   },
   title: {
     color: `${cornSilk}`,
@@ -68,8 +73,9 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontFamily: 'Peralta',
   },
-  // scrollView: {
-  //   height: '100%',
-  //   backgroundColor: `${liverDogs}`,
-  // }
+  homeScreen: {
+    backgroundColor: `${fawn}`
+  }
 });
+
+export default App;
