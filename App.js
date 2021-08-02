@@ -1,9 +1,11 @@
+import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import AppLoading from 'expo-app-loading';
 import { useFonts } from 'expo-font';
 import { assets } from './react-native.config';
+import { NavigationContainer } from '@react-navigation/native';
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -13,21 +15,23 @@ export default function App() {
     return <AppLoading/>
   } else {
     return (
-      <View style={styles.container}>
-        <Text
-          style={styles.title}
-          >
-              Happy Campers! 
-          </Text>
-          <View>
-            <Text
-              style={styles.text}
+      <NavigationContainer>
+        <View style={styles.container}>
+          <Text
+            style={styles.title}
             >
-              Swipe Up For A List of Venues
+                Happy Campers! 
             </Text>
-          </View>
-        <StatusBar style="auto" />
-      </View>
+            <View>
+              <Text
+                style={styles.text}
+              >
+                Swipe Up For A List of Venues
+              </Text>
+            </View>
+          <StatusBar style="auto" />
+        </View>
+      </NavigationContainer>
     );
   }
   
@@ -44,21 +48,28 @@ const liverDogs = "#bc6c25ff"
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 4,
+    flexDirection: 'column',
     backgroundColor: '#283618ff',
     alignItems: 'center',
     justifyContent: 'center',
+    height: 150,
   },
   title: {
     color: `${cornSilk}`,
     fontSize: 40,
     fontWeight: '900',
     lineHeight: 200,
-    textDecorationLine: 'underline',
+    // textDecorationLine: 'underline',
     fontFamily: 'Peralta',
   },
   text: {
     color: `${cornSilk}`,
     fontSize: 20,
+    fontFamily: 'Peralta',
   },
+  // scrollView: {
+  //   height: '100%',
+  //   backgroundColor: `${liverDogs}`,
+  // }
 });
